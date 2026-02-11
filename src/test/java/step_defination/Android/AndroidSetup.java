@@ -42,9 +42,13 @@ public class AndroidSetup {
     @After
     public void tearDown(Scenario scenario) {
         if (scenario.isFailed()) {
-            // Take a screenshot if the scenario fails
-            final byte[] screenshot = ((TakesScreenshot) getAndroidDriver()).getScreenshotAs(OutputType.BYTES);
-            scenario.attach(screenshot, "image/png", "screenshot");
+            // Take a screenshot if the scenario fails (wrapped in try-catch for UiAutomator2 crash)
+            try {
+                final byte[] screenshot = ((TakesScreenshot) getAndroidDriver()).getScreenshotAs(OutputType.BYTES);
+                scenario.attach(screenshot, "image/png", "screenshot");
+            } catch (Exception e) {
+                System.out.println("Could not take screenshot (UiAutomator2 may be crashed): " + e.getMessage());
+            }
         }
 
         // Quit the Android driver if the "@final" tag is present

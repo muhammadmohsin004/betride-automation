@@ -1,2 +1,29 @@
-.idea
-target
+# IDE
+.idea/
+*.iml
+
+# Build
+target/
+
+# Allure reports
+allure-results/
+allure-report/
+
+# APK files
+apk/
+
+# Claude Code
+.claude/
+
+# Debug/temp files
+nul
+debug_screen.py
+page_source.xml
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test data files
+*.xlsx
+*.csv

@@ -10,11 +10,13 @@ Feature: Home Page Testing App
     # And User taps on "تأكيد اللغة"
     Given User should see "Enter your Whatsapp number"
     When User taps on Phone Number field
-    And User type "650629209" in Phone Number field
+    And User type "650629206" in Phone Number field
     And User clicks on Accept Agreements and Terms checkbox
     And User taps on "Submit"
     Then User should see "OTP Verification"
     When user enter "12345" in otp field
+    And User taps on "Allow"
+
     Then User should see "Your Status:"
     Then User should taps on "Active Jobs"
     Then User should see "Active Jobs" page

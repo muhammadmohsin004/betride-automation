@@ -1,0 +1,794 @@
+Test Case ID	Module	Scenario/Description	Preconditions	Steps	Expected Result	Result	Comments	Unnamed: 8	Unnamed: 9	Time Duration	Unnamed: 11	Automation Status 	Completion Date
+TC-001	Login & OTP	Login with active mobile number	User has active registered number	"1. Open app
+2. Enter active number
+3. Tap Continue"	OTP screen appears and OTP is sent		passed					Completed	2025-12-29
+TC-002	Login & OTP	Login with inactive number	Number not in system	"1. Enter inactive number
+2. Tap Continue"	Invalid or Expired token		"Failed
+if we navigate back amd renter the otp invalid or expired token appears"					Completed	2025-12-29
+TC-003	Login & OTP	Correct OTP login	OTP received	"1. Enter valid OTP
+2. Tap Verify"	Login successful → Home screen		Paaed					Completed	2025-12-29
+TC-004	Login & OTP	Invalid OTP	OTP screen open	"1. Enter wrong OTP
+2. Tap Verify"	Error: 'Invalid OTP'		passed					Completed	2025-12-29
+TC-005	Login & OTP	Resend OTP	OTP countdown expired	"1. Tap resend
+2. Wait for new OTP"	New OTP sent		passed					Completed	2025-12-29
+TC-006	Rider Home	Home screen loads for rider after login	User logged in	"1. Login with OTP
+2. Observe home screen"	Map + ride options visible (Select Ride	Hourly	passed					Completed	2025-12-29
+TC-007	Rider Home	Map loads correctly	GPS enabled	"1. Login
+2. Open home"	Map loads with rider’s location		passed					Completed	2025-12-29
+TC-008	Ride Creation	Rider creates ride → driver receives alert	Both rider/driver logged in	"1. Rider creates ride
+2. Driver receives popup"	Driver popup shows Accept/Reject + Fare + Locations		passed			5 Ddays		Completed	2025-12-29
+TC-009	Ride Accept	Driver accepts → rider receives Accept/Reject popup	Ride created and sent to driver	"1. Rider creates ride
+2. Driver taps Accept"	Rider gets popup with “How far driver is” + Accept/Reject		passed					Completed	2025-12-31
+TC-010	Ride Reject	Driver rejects → rider receives NO alert	Ride created	"1. Rider creates ride
+2. Driver taps Reject"	Rider gets NO accept/reject popup		passed					Completed	2025-12-31
+TC-011	Ride Details (Driver)	Ride details visible on driver popup	Ride request sent	"1. Rider creates ride
+2. Driver gets alert
+3. Tap ride card"	Driver sees details + fare + distance + decreasing status bar		passed					Completed	2025-12-31
+TC-012	Auto Price Ride	Rider rejects → auto ride in 5 minutes	Driver accepted ride	"1. Driver accepts
+2. Rider rejects
+3. Wait 5 minutes"	New ride created with original 6GM fare + increased price		"Failed
+"					Completed	2025-12-31
+TC-013	Penalty Popup	Driver rejects 3 rides (6am–12pm)	Driver active between 6AM–12PM	1. Driver rejects ride 3 times	Popup: 'You may receive fewer rides…'		failed					Completed	2025-12-31
+TC-014	Fake Ride Protection	No fake ride appears even if API hits sent	Fake ride API triggers	"1. Rider creates ride
+2. Trigger fake ride API"	Driver sees ONLY real ride request; no fake requests							Completed	2025-12-31
+TC-015	Location Sync	Driver sees same location rider selected	Ride created	"1. Rider selects pickup & drop
+2. Driver receives alert"	Driver popup shows exact same locations		passed					Completed	2025-12-31
+TC-016	Duplicate Ride Prevention	No duplicate rides go to driver	Backend allows duplicate	"1. Create multiple same rides
+2. Observe driver view"	Driver receives only ONE ride request		passed					Completed	2025-12-31
+TC-017	Vibration Behavior	Driver receives vibration + stops after close	Ride accepted by both	"1. Driver accepts ride
+2. Rider accepts driver
+3. Driver gets vibration alert
+4. Close alert"	Vibration stops immediately		Failed					Completed	2025-12-31
+TC-018	Hourly Ride	Driver sees hourly ride alert with message	Rider selects hourly ride	"1. Rider books hourly ride
+2. Driver receives alert"	Popup shows hourly duration + accept/reject		pssed					Completed	2025-12-31
+TC-019	Hourly Ride Type Validation	Hourly ride should NOT appear as normal ride	Rider books hourly ride	"1. Rider requests hourly ride
+2. Driver receives alert"	Ride type displayed correctly (Hourly)		passed					Completed	2025-12-31
+TC-020	Driver Balance Check	Driver low-balance warning appears	Balance < minimum	"1. Rider creates ride
+2. Driver taps Accept"	Popup: “Balance low	recharge to continue”	passed					Completed	2025-12-31
+TC-021	Timeout	Ride request times out if driver does not respond	Ride created	"1. Rider creates ride
+2. Driver does not respond"	Timer expires → driver alert disappears → rider searches new driver		passed					Completed	2026-01-06
+TC-022	Crash Handling	Driver app reopens showing ride alert after crash	Ride created	"1. Rider creates ride
+2. Force close driver app
+3. Reopen app"	Same ride alert still visible if not reassigned		passed					Completed	2026-01-06
+TC-023	GPS Disabled	Driver cannot accept ride with GPS off	GPS disabled	"1. Turn off GPS
+2. Driver receives ride
+3. Tap Accept"	Error: “Enable GPS to accept ride”		passed					Completed	2026-01-06
+TC-024	Ride Rating	Verify that completed ride shows “Rate Your Driver” popup when rider reopens the app	1. A ride was created by driver 2. Driver completed the ride 3. Rider closed the app after completion	1. Complete the ride as driver 2. Close the rider app 3. Reopen the rider app	“Rate Your Driver” popup should appear with pickup & drop-off address and star rating		Passed					Completed	2026-01-06
+TC-025	Ride Rating	Verify clicking stars navigates to Rate Driver page	“Rate Your Driver” popup displayed	1. Tap any star on popup	App redirects to the full “Rate Driver” page		Passed					Completed	2026-01-06
+TC-026	Rate Driver Page	Verify Rate Driver page allows rider to select star rating	On Rate Driver page	1. Tap any star (1–5)	Star selection is highlighted and saved		Passed					Completed	2026-01-06
+TC-027	Rate Driver Page	Verify “Did driver come on time?” radio option appears	On Rate Driver page	1. Scroll to “Did driver come on time?”	Radio buttons Yes / No should display		Passed					Completed	2026-01-06
+TC-028	Rate Driver Page	Verify “Did driver provide you a helmet?” radio option appears	On Rate Driver page	1. Scroll to helmet question	“Yes / No” options should appear		Passed					Completed	2026-01-06
+TC-029	Rate Driver Page	Verify rider can input text in “Tell us what can be improved” field	On Rate Driver page	1. Tap text box 2. Enter text	Text should be accepted and displayed		Passed					Completed	2026-01-06
+TC-030	Rate Driver Page	Verify “Had bad experience? Report Driver Now” link appears and is clickable	On Rate Driver page	1. Tap “Report Driver Now”	Rider should be redirected to report submission page		Passed					Completed	2026-01-06
+TC-031	Rate Driver Page	Verify “Submit Rating” button is displayed	On Rate Driver page	1. Scroll to bottom	“Submit Rating” button is visible and clickable		Passed					Completed	2026-01-09
+TC-032	Rate Driver Page	Verify validation when submitting rating without selecting stars or fields	On Rate Driver page	1. Do not select stars 2. Tap “Submit Rating”	Pop-up/Toast should show: “Please give a star rating to driver”		Passed					Completed	2026-01-09
+TC-033	Ride Rating	Verify submission redirects to Invite Friends page	Stars selected	1. Fill rating fields 2. Tap “Submit Rating”	Rider is redirected to Invite Friends page		Passed					Completed	2026-01-09
+TC-034	Invite Friends	Verify Invite Friends page contains “Click here to share” button	Rider navigated to Invite Friends page	1. Open Invite Friends page	“Click Here to Share” button is displayed		Passed					Completed	2026-01-09
+TC-035	Ride Offers	Verify Flash Offer prompt appears when rider opens an active ride	Rider has an active or eligible ride	1. Open ride details page	Flash Offer prompt should appear		Passed					Completed	2026-01-09
+TC-036	Rider Profile	Verify clicking profile picture opens History tab	Rider on home screen	1. Tap rider profile picture	App navigates to History Tab		Passed					Completed	2026-01-09
+TC-037	Ride History	Verify History tab displays In-Progress, Completed, and Cancelled rides	Rider has past and ongoing rides	1. Go to History Tab	History tab shows In Progress, Completed, Cancelled sections with correct rides		Passed					Completed	2026-01-09
+Rider App Test Cases												Completed	2026-01-09
+TC-038	Verify navigation to Notifications page	User logged in	1. Open Settings 2. Tap Notifications	Notifications page opens and displays notification options			passed					Completed	2026-01-09
+TC-039	Verify notification list items/toggles appear	Notifications page open		Notification categories or toggles display correctly			Passed					Completed	2026-01-09
+TC-040	Verify toggling notifications ON/OFF	Notifications page open	Toggle ON → toggle OFF	Preference saved, toggle updates correctly			Passed					Completed	2026-01-10
+TC-041	Offline mode behavior in Notifications	Internet OFF	Change toggle	Error shown (No Internet), app does not crash			Passed					Completed	2026-01-10
+TC-042	Verify navigation to Language selection page	User logged in	1. Open Settings 2. Tap Languages	“Choose the language” page is shown with language list			Passed					Completed	2026-01-10
+TC-043	Verify selecting a language	Language screen open	Tap English/Arabic/French	Language option gets selected (radio button active)			Passed					Completed	2026-01-10
+TC-044	Verify Confirm Language button	Language selected	Tap Confirm Language	App switches to selected language successfully			Passed					Completed	2026-01-10
+TC-045	Cannot confirm without selecting a language	No language selected	Tap Confirm Language	Error appears: “Please select a language.”			Passed					Completed	2026-01-10
+TC-046	Verify navigation to Delete Account page	User logged in	1. Open Settings 2. Tap Delete Account	Delete Your Account screen opens with full warning text + captcha			Passed					Completed	2026-01-10
+TC-047	Verify captcha is required	Delete Account page open	Leave input empty → Continue	Error: “Please enter the correct sum.”			Passed					Completed	2026-01-10
+TC-048	Verify incorrect captcha shows error	Delete Account page open	Enter incorrect value → Continue	Error: “Incorrect sum. Try again.”			Passed						
+TC-049	Verify correct captcha continues deletion flow	Delete Account page open	Enter correct captcha → Continue	Moves to account deletion confirmation; user is logged out after deleting			Passed						
+TC-50	Offline deletion attempt	Internet OFF	Enter sum → Continue	Error: “No internet connection.” Account not deleted			Passed						
+TC-51	Verify navigation to Send Device Logs	User logged in	1. Open Settings 2. Tap Send Device Logs	Confirmation popup appears (Yes/No) OR logs start sending			Passed						
+TC-52	Verify send logs confirmation popup	Send Logs tapped		Popup: “Send device logs?” Buttons Yes/No			Passed						
+TC-53	Verify successful log submission	Internet ON, popup shown	Tap Yes	Logs sent successfully; Success message appears			Passed						
+TC-54	Verify cancelling log send	Popup shown	Tap No	Popup closes; No logs are sent			Passed						
+TC-55	Offline log submit attempt	Internet OFF	Tap Yes on popup	Error: “Unable to send logs. No internet connection.”			Passed						
+TC-056	Ride Booking	Open Add Destination page from Home	Home page loaded	1. Tap “Book Ride” button	App navigates to Add Destination page		Passed						
+TC-057	Ride Booking	Autocomplete location suggestions	App opened → Add Destination page	1. Type text in pickup field	2. Observe suggestions	Suggestions displayed based on input	Passed						
+TC-058	Ride Booking	Incorrect location entry	App opened → Add Destination page	1. Enter invalid location text	Suggestions should show “No results found”		Passed						
+TC-059	Ride Booking	Clear pickup field	Pickup field filled	1. Tap (x) clear icon	Pickup field becomes empty		Passed						
+TC-060	Ride Booking	Clear drop-off field	Drop-off field filled	1. Tap (x) clear icon	Drop-off field becomes empty		Passed						
+TC-061	Confirm Ride	Verify travel time display	Confirm Ride page loaded	1. View travel time section	Estimated travel time is displayed correctly		Passed						
+TC-062	Confirm Ride	Verify distance calculation	Confirm Ride loaded	1. View distance	Distance matches actual route (0.97 km etc.)		Passed						
+TC-063	Confirm Ride	Discount label verification	Discount applicable	1. Open Confirm Ride	Discount message “Discount automatically applied” appears		Passed						
+TC-064	Confirm Ride	Multiple fare increase actions	Confirm Ride loaded	1. Tap +1 five times	Fare increases by 5 MAD		Passed						
+TC-065	Confirm Ride	Multiple fare decrease actions	Confirm Ride loaded, increased fare	1. Tap -1 five times	Fare decreases by 5 MAD		Passed						
+TC-066	Confirm Ride	Fare cannot be negative	Fare set to minimum	1. Tap -1 again	Fare remains at minimum allowed		Passed						
+TC-067	Driver Search	Driver availability display	Search initiated	1. Tap “Search for Driver”	Nearby drivers displayed on map		Passed						
+TC-068	Driver Search	Searching animation behavior	Search initiated	1. Observe system	Searching animation loops until driver accepts or user cancels		Passed						
+TC-069	Driver Search	Popup appears on cancel action	Searching active	1. Tap “Cancel Request”	Cancel popup appears immediately		Passed						
+TC-070	Driver Search	Cancel popup close on NO	Cancel popup visible	1. Tap NO	Popup closes and user stays in searching screen		Passed						
+TC-071	Driver Search	Cancel popup confirm on YES	Cancel popup visible	1. Tap YES	User navigates back to previous screen and search stops		Passed						
+TC-072	Ride Booking	Reopen app during searching	App in searching state	1. Close app	2. Reopen app	App resumes at searching screen or shows correct ride state	Passed						
+TC-073	Ride Booking	App behavior with GPS off	GPS disabled	1. Open Add Destination	GPS permission popup appears or manual entry required		Passed						
+TC-074	Ride Booking	App behavior with no internet	Internet off	1. Tap “Let’s Go”	Error message: “No internet connection”		Fail						
+TC-075	Ride Booking	Drop-off same as pickup	Pickup & drop-off set same	1. Enter same location in both fields	Error: “Pickup and drop-off cannot be same”		Fail						
+TC-076	Ride Booking	Multiple recent locations	Recent history has 5+ items	1. View Last visited places	List scrolls correctly and all items visible		Passed						
+TC-077	Ride Booking	Select pickup from recent locations	Recent history exists	1. Tap recent location under pickup	Pickup field updates correctly		Passed						
+TC-078	Ride Booking	Select drop-off from map	Map opened	1. Move map pin	Drop-off updates based on pin location		Passed						
+TC-079	Ride Booking	Navigate back from Confirm Ride	Confirm Ride loaded	1. Tap back arrow	App returns to Add Destination page		Passed						
+TC-080	Confirm Ride	Verify correct currency shown	App configured to MAD	1. Open Confirm Ride	Fare shown in MAD currency format		Passed						
+TC-081	Home Screen	Verify Book Hourly option visible	Home screen loaded	1. Open Home screen	“Book hourly” option is visible		Passed						
+TC-082	Home Screen	Navigate to Book Hourly page	Home screen loaded	1. Tap “Book hourly”	App navigates to “Book driver by the hour” page		Passed						
+TC-083	Book Hourly	Page UI validation	Book hourly page open	1. View screen	Pickup field, hour selector, Next button visible		Passed						
+TC-084	Book Hourly	Select pickup location	Pickup not selected	1. Tap “Select pickup location” 2. Choose a location	Pickup field updates with selected location		Passed						
+TC-085	Book Hourly	Manual pickup entry	Pickup not selected	1. Tap pickup field 2. Type location manually 3. Select from suggestions	Pickup location updated via manual entry		Passed						
+TC-086	Book Hourly	Validation: pickup missing	Pickup not selected	1. Tap Next	Error displayed: “Please select pickup location”		Passed						
+TC-087	Book Hourly	Default hours = 1	Book hourly page open	1. View hour selector	Default hours displayed = 1 hour		Passed						
+TC-088	Book Hourly	Increase hours using selector	Selector active	1. Move selector clockwise	Hours increase (1 → 2 → 3 → …)		Passed						
+TC-089	Book Hourly	Decrease hours using selector	Selector hours > 1	1. Move selector counter-clockwise	Hours decrease (e.g., 5 → 4 → 3)		Passed						
+TC-090	Book Hourly	Minimum hours validation	Hours = 1	1. Try decreasing	Hours remain at 1 hour (cannot go lower)		Passed						
+TC-091	Book Hourly	Maximum hours validation	Hours < 12	1. Increase hours to max	Hours stop at 12 hours		Passed						
+TC-092	Book Hourly	Select full range of hours	Selector active	1. Move selector from 1 to 12	Hours update accurately for each position		Passed						
+TC-093	Book Hourly	Navigate to Confirm Booking	Pickup + hours selected	1. Tap Next	App navigates to Confirm Booking page		Passed						
+TC-094	Confirm Booking	Verify map display	Confirm Booking screen open	1. View map	Map loads with pickup flag shown		Passed						
+TC-095	Confirm Booking	Verify pickup location displayed	Confirm Booking page loaded	1. View FROM address	Correct pickup address displayed under FROM		Passed						
+TC-096	Confirm Booking	Verify selected hours displayed	Selected hours = X	1. View “Number of hours selected”	Shows “X.0 Hours” (e.g., 12.0 Hours)		Passed						
+TC-097	Confirm Booking	Fare calculation display	Confirm Booking open	1. View fare section	Fare is calculated based on selected hours		Passed						
+TC-098	Confirm Booking	Increase fare (+1)	Fare > 0	1. Tap +1	Fare increases by 1 MAD per tap		Passed						
+TC-099	Confirm Booking	Decrease fare (-1)	Fare > minimum	1. Tap –1	Fare decreases by 1 MAD per tap		Passed						
+TC-100	Confirm Booking	Fare minimum validation	Fare at minimum	1. Tap –1	Fare does not go below minimum allowed		Passed						
+TC-101	Confirm Booking	Verify discount label	Discount rule enabled	1. View discount text	Shows “Discount automatically applied”		Passed						
+TC-102	Confirm Booking	Book your driver button	Pickup + hours + fare selected	1. Tap “Book your driver”	App navigates to ride searching screen		Passed						
+TC-103	Driver Search	Searching UI validation	Searching screen open	1. View screen	Message: “Your ride request is sent to drivers” + driver icons		Passed						
+TC-104	Driver Search	Cancel request button	Search active	1. Tap Cancel Request	Cancel popup appears		Passed						
+TC-105	Driver Search	Cancel: YES action	Cancel popup visible	1. Tap YES	Ride request cancelled → returns to previous screen		Passed						
+TC-106	Driver Search	Cancel: NO action	Cancel popup visible	1. Tap NO	Popup closes → searching continues		Passed						
+TC-107	Driver Search	App minimize/restore during search	Searching active	1. Minimize app 2. Reopen	App resumes in search mode (no reset)		Passed						
+TC-108	Book Hourly	Error validation: hours set to 0 (if selector bug occurs)	Hour selector glitch	1. Try setting hours to 0	Error: “Minimum booking is 1 hour”		Passed						
+TC-109	Book Hourly	Error validation: hours > 12 (if API glitch)	Hours exceed limit	1. Try setting hours above 12	Error: “Maximum limit is 12 hours”		Passed						
+TC-110	Book Hourly	Return to hourly page from confirmation	Confirm Booking open	1. Tap back arrow	App returns to hourly selection page		Passed						
+TC-111	Home Screen	Verify City to City option visible	Home screen loaded	1. Open Home screen	“City to City” option is visible		Passed						
+TC-112	Home Screen	Navigate to City to City page	Home screen loaded	1. Tap “City to City”	App navigates to “Start your city to city ride” page		Passed						
+TC-113	City to City	Page UI validation	City to City page open	1. View screen	Pickup field, drop-off field, last visited places, Next button visible		Fail						
+TC-114	City to City	Select pickup location from map	Pickup empty	1. Tap Select pickup location 2. Pick a location	Pickup field is filled with selected location		Passed						
+TC-115	City to City	Manual pickup entry	Pickup empty	1. Tap pickup field 2. Type address 3. Select from suggestions	Pickup field updated with typed location		Passed						
+TC-116	City to City	Select drop-off location from map	Drop-off empty	1. Tap Select drop-off location 2. Pick location	Drop-off location updated successfully		Passed						
+TC-117	City to City	Manual drop-off entry	Drop-off empty	1. Tap drop-off field 2. Type address 3. Select from suggestions	Drop-off location updated correctly		Passed						
+TC-118	City to City	Validation: missing pickup	Pickup not selected	1. Tap Next	Error displayed: “Please select pickup location”		Passed						
+TC-119	City to City	Validation: missing drop-off	Drop-off not selected	1. Tap Next	Error displayed: “Please select drop-off location”		Passed						
+TC-120	City to City	Select drop-off from last visited places	Last visited list visible	1. Tap a location under last visited places	Drop-off field updates with selected visited location		Passed						
+TC-121	City to City	Clear pickup field	Pickup filled	1. Tap (x) clear icon	Pickup becomes empty		Passed						
+TC-122	City to City	Clear drop-off field	Drop-off filled	1. Tap (x) clear icon	Drop-off becomes empty		Passed						
+TC-123	City to City	Next button navigation	Both fields selected	1. Tap Next	App navigates to Confirm Ride page		Passed						
+TC-124	Confirm Ride	Verify route on map	Confirm Ride open	1. View map	Map displays route from pickup to drop-off		Passed						
+TC-125	Confirm Ride	Verify FROM address	Confirm Ride open	1. View FROM section	Correct pickup address displayed		Passed						
+TC-126	Confirm Ride	Verify TO address	Confirm Ride open	1. View TO section	Correct drop-off address displayed		Passed						
+TC-127	Confirm Ride	Verify estimated travel time	Confirm Ride loaded	1. View “Estimated travel time”	Text displays correct estimate (example: 3 mins)		Passed						
+TC-128	Confirm Ride	Verify total distance	Confirm Ride loaded	1. View “Total distance”	Distance displayed correctly (example: 1.29 km)		Passed						
+TC-129	Confirm Ride	Verify default fare	Confirm Ride open	1. View fare	Fare (e.g., 6 MAD) displayed correctly		Passed						
+TC-130	Confirm Ride	Increase fare (+1 button)	Fare editable	1. Tap +1 button	Fare increases by exactly 1 MAD		Passed						
+TC-131	Confirm Ride	Decrease fare (-1 button)	Fare > minimum	1. Tap -1 button	Fare decreases by exactly 1 MAD		Passed						
+TC-132	Confirm Ride	Fare minimum validation	Fare at minimum	1. Tap -1	Fare does not decrease below minimum		Passed						
+TC-133	Confirm Ride	Verify discount label	Discount enabled	1. View discount text	“*Discount automatically applied*” is visible		Passed						
+TC-134	Confirm Ride	Search for Driver	Button enabled	1. Tap “Search for Driver”	Navigates to driver searching screen		Passed						
+TC-135	Driver Search	Searching screen display	Searching active	1. View screen	Shows “Your ride request is sent to drivers” + driver icons on map		Passed						
+TC-136	Driver Search	Cancel request button	Searching screen active	1. Tap “Cancel Request”	Cancel confirmation popup displayed		Passed						
+TC-137	Driver Search	Cancel: YES action	Cancel popup visible	1. Tap YES	Request cancelled → returns to previous screen		Passed						
+TC-138	Driver Search	Cancel: NO action	Cancel popup visible	1. Tap NO	Popup closes → search continues		Passed						
+TC-139	Driver Search	App minimize & return during search	Searching active	1. Minimize app 2. Reopen	App resumes in correct searching state		Passed						
+TC-140	City to City	Validation: pickup = drop-off	Same location chosen for both	1. Select same location for pickup & drop-off 2. Tap Next	Error: “Pickup and drop-off cannot be same”		Passed						
+TC-141	Home Screen	"Verify ""Get Anything"" option visible"	Home screen loaded	1. Open app 2. Navigate to home page	Get Anything section is visible		Passed						
+TC-142	Home Screen	Open Get Anything screen	Home page loaded	"1. Tap on ""Get Anything"""	"User navigates to ""Send or Receive Anything"" page"		Passed						
+TC-143	Send/Receive	Page UI elements verification	Page loaded	1. Scroll page 2. Observe UI	All elements visible: Pickup, Drop-off, Sending/Receiving buttons, Recipient fields, Upload image, Description, NEXT button		Passed						
+TC-144	Send/Receive	Select pickup location manually	Pickup empty	1. Tap pickup 2. Search location 3. Select location	Pickup location filled correctly		Passed						
+TC-145	Send/Receive	Select pickup from map	Pickup empty	"1. Tap ""Select pickup location"" 2. Choose from map"	Map closes & pickup field updates accurately		Passed						
+TC-146	Send/Receive	Clear pickup location	Pickup filled	"1. Tap ""X"" icon"	Pickup field becomes blank		Passed						
+TC-147	Send/Receive	Select drop-off manually	Drop-off empty	1. Tap drop-off field 2. Type location 3. Select suggestion	Drop-off location set correctly		Passed						
+TC-148	Send/Receive	Select drop-off from map	Drop-off empty	"1. Tap ""Select drop-off location"" 2. Choose location"	Drop-off field updated correctly		Passed						
+TC-149	Send/Receive	Clear drop-off location	Drop-off filled	"1. Tap ""X"" icon"	Drop-off field cleared successfully		Passed						
+TC-150	Send/Receive	Validation error when pickup missing	Pickup empty	1. Fill all except pickup 2. Tap NEXT	"Error: ""Select pickup location"""		Passed						
+TC-151	Send/Receive	Validation error when drop-off missing	Drop-off empty	1. Fill all except drop-off 2. Tap NEXT	"Error: ""Select drop-off location"""		Passed						
+TC-152	Send/Receive	Validation when pickup & drop-off same	Same location selected	1. Select same address for both fields 2. Tap NEXT	"Error displayed: ""Pickup and drop-off cannot be same"""		Passed						
+TC-153	Send/Receive	"Select ""I am sending"" mode"	Default mode turned off/on	"1. Tap ""I’m sending"""	Button gets highlighted		Passed						
+TC-154	Send/Receive	"Select ""I am receiving"" mode"	Default mode	"1. Tap ""I’m receiving"""	Mode changes & UI updates		Passed						
+TC-155	Send/Receive	Enter Participant Name	Field empty	1. Enter text in field	Participant name saved successfully		Passed						
+TC-156	Send/Receive	Enter Recipient Number	Field empty	1. Type a valid phone number	Field validates and accepts number		"passed
+"						
+TC-157	Send/Receive	Validation missing Participant Name	Name empty	1. Leave blank 2. Tap NEXT	"Error: ""Participant name required"""		"passed
+
+"						
+TC-158	Send/Receive	Validation missing Recipient Number	Phone empty	1. Leave blank 2. Tap NEXT	"Error: ""Recipient number required"""		"passed
+
+"						
+TC-159	Send/Receive	Invalid phone number entered	Invalid format	1. Enter invalid number 2. Tap NEXT	"Error: ""Enter valid phone number"""		"passed
+
+"						
+TC-160	Send/Receive	Upload image of item	Image upload available	1. Tap + icon 2. Select image	Image preview displayed successfully		"passed
+
+"						
+TC-161	Send/Receive	Remove uploaded item image	Image added	1. Tap remove (X)	Image removed successfully		"passed
+
+"						
+TC-162	Send/Receive	Enter item description	Optional field	1. Type description in box	Description saved		"passed
+
+"						
+TC-163	Send/Receive	Description optional validation	Description empty	1. Leave empty 2. Tap NEXT	Navigates next without error		"passed
+
+"						
+TC-164	Send/Receive	Press NEXT to go to confirmation	All mandatory fields valid	1. Tap NEXT	User navigates to Delivery Confirmation page		"passed
+
+"						
+TC-165	Delivery Confirmation	Verify route map displayed	Map available	1. Observe screen	Map with route & icons displayed		"passed
+
+"						
+TC-166	Delivery Confirmation	Verify pickup address	Pickup selected	1. View FROM address	Correct pickup address displayed		"passed
+
+"						
+TC-167	Delivery Confirmation	Verify drop-off address	Drop-off selected	1. View TO address	Correct drop-off address displayed		"passed
+
+"						
+TC-168	Delivery Confirmation	Verify estimated delivery time	Route available	1. Observe ETA section	Estimated time shown (e.g., 2 mins)		"passed
+
+"						
+TC-169	Delivery Confirmation	Verify total distance shown	Route loaded	1. Observe distance value	Correct distance shown		"passed
+
+"						
+TC-170	Delivery Confirmation	Verify base fare shown	Fare loaded	1. Observe fare section	Base fare (ex: 7 MAD) displayed		"passed
+
+"						
+TC-171	Delivery Confirmation	Increase fare amount (+1)	Fare editable	1. Tap +1 button	Fare increases by 1 MAD		"passed
+
+"						
+TC-172	Delivery Confirmation	Decrease fare amount (-1)	Fare > minimum	1. Tap -1 button	Fare decreases by 1 MAD		"passed
+
+"						
+TC-173	Delivery Confirmation	Minimum fare limit check	Fare at minimum	1. Tap -1 again	Fare does not go below minimum		"passed
+
+"						
+TC-174	Delivery Confirmation	Discount message visible	Discount allowed	1. Observe text	*Discount automatically applied* is visible		"passed
+
+"						
+TC-175	Delivery Confirmation	Send Request button enabled	All fields valid	1. Tap Send Request	Navigates to Driver Searching screen		"passed
+
+"						
+TC-176	Searching Screen	Verify searching UI	Request sent successfully	1. Observe screen	"Message: ""Your order is sending to drivers"""		"passed
+
+"						
+TC-177	Searching Screen	Verify driver icons shown	Map available	1. Observe drivers on map	Multiple driver icons appear around pickup		"passed
+
+"						
+TC-178	Searching Screen	Tap Cancel Request button	Request active	1. Tap Cancel Request	Cancel confirmation popup displayed		"passed
+
+"						
+TC-179	Searching Screen	Confirm cancellation (YES)	Popup visible	1. Tap YES	Request cancelled & returned to previous page		"passed
+
+"						
+TC-180	Searching Screen	Cancel cancellation (NO)	Popup visible	1. Tap NO	Popup closes & searching continues		"passed
+
+"						
+TC-181	Notifications	Verify Notification Bell Icon Visible	User is on Home screen	1. Open app 2. Check top bar	Bell icon is visible with correct badge count		"passed
+
+"						
+TC-182	Notifications	Open Notifications & Messages Screen	User is on Home screen	1. Tap Bell icon	Notifications & Messages screen is displayed		"passed
+
+"						
+TC-183	Notifications	Verify Notifications Tab UI	Notifications available	1. Tap Notifications tab	UI elements visible: list, text, timestamps		"passed
+
+"						
+TC-184	Notifications	View All Notifications	Notifications available	1. Tap Notifications tab 2. Scroll	List scrolls smoothly; all notifications appear		"passed
+
+"						
+TC-185	Notifications	Open Notification Item	Notifications available	1. Tap a notification	Navigates to relevant page (if supported)		"passed
+
+"						
+TC-186	Notifications	Verify Notification Timestamp Format	Notifications available	1. Check timestamps	Correct format displayed (DD/MM/YYYY HH:MM)		"passed
+
+"						
+TC-187	Notifications	Verify Badge Count Removes After Viewing	New unread notifications exist	1. Tap Bell icon 2. Open notifications	Badge count resets or reduces (if supported)		"passed
+
+"						
+TC-188	Notifications	Verify No Notifications State	No notifications exist	1. Tap Notifications tab	"Shows ""No Notifications"" placeholder message"		"passed
+
+"						
+TC-189	Notifications	Pull to Refresh Notifications	Notifications available	1. Swipe down to refresh	List refreshes; new notifications appear		"passed
+
+"						
+TC-190	Messages	Open Messages Tab	Messages available	1. Tap Bell icon 2. Tap Messages tab	Messages list loads successfully		"passed
+
+"						
+TC-191	Messages	Verify Messages Tab UI	Messages available	1. Open Messages tab	UI elements visible: text, timestamps, reply buttons		"passed
+
+"						
+TC-192	Messages	Verify Reply Button UI	Messages available	1. Open Messages tab 2. Observe reply button	Reply button visible (red background, white text)		"passed
+
+"						
+TC-193	Messages	Open Reply Popup	Messages available	1. Tap Reply button	Reply popup appears with text box + Reply + Cancel		"passed
+
+"						
+TC-194	Messages	Verify Reply Popup UI	Popup opened	1. Inspect popup	UI layout correct, placeholder visible		"passed
+
+"						
+TC-195	Messages	Enter Text in Reply Field	Popup opened	1. Tap input 2. Type “Hello”	Text appears correctly		"passed
+
+"						
+TC-196	Messages	Send Reply Successfully	Popup opened	1. Enter text 2. Tap Reply	Toast message: “Reply sent successfully”		"passed
+
+"						
+TC-197	Messages	Verify Success Toast Behavior	Reply successful	1. View toast	Toast is visible & auto-dismisses		"passed
+
+"						
+TC-198	Messages	Cancel Reply	Popup opened	1. Tap Cancel	Popup closes, no message sent		"passed
+
+"						
+TC-199	Messages	Send Empty Reply (Negative)	Popup opened	1. Leave field empty 2. Tap Reply	Error: “Reply cannot be empty”		"passed
+
+"						
+TC-200	Messages	Reply With Slow/No Internet	Network off	1. Type message 2. Tap Reply	Error: “Failed to send reply. Check your connection.”		"passed
+
+"						
+TC-201	Messages	Verify Messages List Scroll	Messages available	1. Scroll list	All messages load; no lag or UI break		"passed
+
+"						
+TC-202	Messages	Verify Placeholder Text	Popup opened	1. View input field	"Placeholder: ""Enter your reply here"""		"passed
+
+"						
+TC-203	Messages	Verify Reply Button Disabled if No Input	Popup opened	1. Don’t type anything	Reply button disabled or validation message shown		"passed
+
+"						
+TC-204	Messages	Verify Long Text Reply Support	Popup opened	1. Enter long reply (300+ chars)	Input accepts text without truncation		"passed
+
+"						
+TC-205	Messages	Verify Special Characters Support	Popup opened	1. Type emojis, symbols	Input accepts special characters		"passed
+
+"						
+TC-206	Messages	Close Popup by Clicking Outside	Popup opened	1. Tap outside popup	Popup closes (if app supports this)		"passed
+
+"						
+TC-207	Messages	Multiple Replies to Same Message	Replies allowed	1. Send multiple replies	Replies sent sequentially without errors		"passed
+
+"						
+TC-208	Messages	Verify Time Stamp Format	Messages available	1. Inspect timestamp	Correct format displayed (DD/MM/YYYY HH:MM)		"passed
+
+"						
+TC-209	Messages	Check Message Order	Messages available	1. View list	Messages sorted newest to oldest		"passed
+
+"						
+TC-210	Messages	API Error Handling Simulation	Server error	1. Tap Reply 2. Server returns 500	Error message displayed instead of success		"passed
+
+"						
+TC-211	Messages	Reply Popup Dismiss on Back Button	Popup opened	1. Press device back key	Popup closes safely without sending		"passed
+
+"						
+TC-212	Side Menu	Open side menu by clicking profile picture	User logged in on home screen	1. Tap profile picture on home screen	Side menu opens with user info and menu options		"passed
+
+"						
+TC-213	Side Menu	Close side menu using cross icon	User logged in	1. Open side menu 2. Tap cross (X) icon	Side menu closes immediately		"passed
+
+"						
+TC-214	Side Menu	Verify all menu options visible	User logged in	1. Open side menu	History, Settings, SOS, Ratings, Support, Invite Friends, Download Driver App, Logout all visible		"passed
+
+"						
+TC-215	SOS	Open SOS menu	User logged in	1. Open side menu 2. Tap SOS	Navigates to Emergency Detail screen		"passed
+
+"						
+TC-216	SOS	Verify empty emergency detail state	No emergency contact saved	1. Open SOS	Shows text: “Please add emergency contact detail”		"passed
+
+"						
+TC-217	SOS	Open Add Emergency Detail form	User logged in	1. Open SOS 2. Tap “ADD Emergency Detail”	Navigates to emergency contact form with Full Name + Number fields		"passed
+
+"						
+TC-218	SOS	Input full name and emergency number	User logged in	1. Open SOS 2. Tap Add Emergency Detail 3. Enter name 4. Enter number	Inputs accept valid data		"passed
+
+"						
+TC-219	SOS	Save emergency contact	Valid name & number entered	1. Complete required fields 2. Tap Save	Emergency contact is saved successfully		"passed
+
+"						
+TC-220	SOS	Navigate back from emergency form	User logged in	1. Open SOS 2. Tap Add Emergency Detail 3. Tap Back arrow	Returns to Emergency Detail screen		"passed
+
+"						
+TC-221	SOS	Navigate back to home from SOS	User logged in	1. Open SOS 2. Tap Back arrow	Returns to side menu/home screen		"passed
+
+"						
+TC-222	Ratings	Open Ratings screen	User logged in	1. Open side menu 2. Tap Ratings	Navigates to Ratings list page		"passed
+
+"						
+TC-223	Ratings	Verify ratings list loads	At least one rating exists	1. Open Ratings	List shows driver name, star rating, ride ID		"passed
+
+"						
+TC-224	Ratings	Verify star rendering correct	Data exists	1. Open Ratings	Correct number of stars appear for each review		"passed
+
+"						
+TC-225	Ratings	Scroll ratings list	Multiple ratings exist	1. Open Ratings 2. Scroll down	More ratings load smoothly		"passed
+
+"						
+TC-226	Ratings	Navigate back from Ratings	User logged in	1. Open Ratings 2. Tap Back arrow	Returns to side menu		"passed
+
+"						
+TC-227	Support	Open Support screen	User logged in	1. Open side menu 2. Tap Support	Navigates to Support page		"passed
+
+"						
+TC-228	Support	View support FAQ list	User logged in	1. Open Support	Shows list: “How to claim my free ride?”, “Not getting drivers?”, “Unsatisfied with driver?”		"passed
+
+"						
+TC-229	Support	Expand any FAQ question	Faq items exist	1. Open Support 2. Tap arrow on FAQ item	Faq description expands and text becomes visible		"passed
+
+"						
+TC-230	Support	Collapse expanded FAQ	Faq open	1. Tap arrow again	Collapses FAQ back to default		"passed
+
+"						
+TC-231	Support	Verify WhatsApp connect option	WhatsApp installed	1. Open Support 2. Scroll to bottom 3. Tap WhatsApp icon	WhatsApp opens for support chat		"passed
+
+"						
+TC-232	Support	WhatsApp not installed case	WhatsApp not installed	1. Tap WhatsApp icon	Error: “WhatsApp not installed”		"passed
+
+"						
+TC-233	Invite Friends	Open Invite Friends page	User logged in	1. Open side menu 2. Tap Invite Friends	Invite Friends screen opens		"passed
+
+"						
+TC-234	Invite Friends	Verify promotional text	Prom				"passed
+
+"						
+Driver Test cases 							"passed
+
+"						
+TC-235	Registration	Phone number input screen loads	App installed	Launch app	Phone number screen displays	Pass/Fail	"passed
+
+"						
+TC-236	Registration	Enter valid phone number	Phone number screen open	Enter number, accept terms, tap Continue	Proceeds to Enter Details screen	Pass/Fail	"passed
+
+"						
+TC-237	Registration	Invalid phone number validation	Phone number screen open	Enter invalid number, tap Continue	Error message shown	Pass/Fail	"passed
+
+"						
+TC-238	Driver Details	Enter Details screen loads	Valid phone entered	Open Enter Details screen	All fields appear correctly	Pass/Fail	"passed
+
+"						
+TC-239	Driver Details	Fill details and submit	Enter Details screen open	Enter data and tap Submit	Navigates to OTP screen	Pass/Fail	"passed
+
+"						
+TC-240	Driver Details	Mandatory field validation	Enter Details screen open	Leave required fields empty and tap Submit	Error displayed	Pass/Fail	"passed
+
+"						
+TC-241	Driver Details	City dropdown selection	Enter Details screen open	Open City dropdown and select	Selected city appears	Pass/Fail	"passed
+
+"						
+TC-242	OTP	OTP screen loads	Submit pressed on details page	Observe OTP screen	OTP boxes and timer visible	Pass/Fail	"passed
+
+"						
+TC-243	OTP	Correct OTP submission	OTP screen open	Enter correct OTP and submit	Leads to Home screen	Pass/Fail	"passed
+
+"						
+TC-244	OTP	Incorrect OTP validation	OTP screen open	Enter wrong OTP and submit	Error shown	Pass/Fail	"passed
+
+"						
+TC-245	OTP	Resend OTP works	OTP screen open	Wait timer and tap Resend	New OTP sent	Pass/Fail	"passed
+
+"						
+TC-246	Home Screen	Home screen loads	OTP correct	Open app after OTP	Home screen visible	Pass/Fail	"passed
+
+"						
+TC-247	Home Screen	Wallet balance shown	Home screen open	Check wallet section	Correct balance displayed	Pass/Fail	"passed
+
+"						
+TC-248	Home Screen	Online/Offline toggle	Home screen open	Switch status	Status updates correctly	Pass/Fail	"passed
+
+"						
+TC-249	Home Screen	Driver vehicle icon shown	Home screen open	Check vehicle icon	Correct icon appears	Pass/Fail	"passed
+
+"						
+TC-250	Home Screen	Passenger Late Pickup display	Home screen open	Check late pickup section	Shows 0.00% initially	Pass/Fail	"passed
+
+"						
+TC-251	Home Screen	Recharge for Free button	Home screen open	Tap Recharge for Free	Navigates successfully	Pass/Fail	"passed
+
+"						
+TC-252	Home Screen	Available Trips when online	Driver online	Tap Available Trips	Trips list appears	Pass/Fail	"passed
+
+"						
+TC-253	Home Screen	Available Trips when offline	Driver offline	Tap Available Trips	Warning shown	Pass/Fail	"passed
+
+"						
+TC-254	Home Screen	Map loads driver location	Location on	Check map view	Shows current location	Pass/Fail	"passed
+
+"						
+TC-255	Home Screen	Ride request popup appears	Rider creates a ride	Observe home screen	Ride popup with Accept/Reject appears	Pass/Fail	"passed
+
+"						
+TC-256	Home Screen	Accept ride request	Incoming ride request	Driver taps Accept	Acknowledgement sent to rider	Pass/Fail	"passed
+
+"						
+TC-257	Home Screen	Reject ride request	Incoming ride request	Driver taps Reject	Rejection acknowledgement sent to rider	Pass/Fail	"passed
+
+"						
+TC-258	Home Screen	Acknowledgement after driver accepts	Driver accepted ride	Check rider response	A rider accept/reject notification triggers	Pass/Fail	"passed
+
+"						
+TC-259	Home Screen	Acknowledgement after driver rejects	Driver rejected ride	Check rider response	Rider receives ride rejected message	Pass/Fail	"passed
+
+"						
+TC-260	Home Screen	Incoming ride popup disappears on timeout	Incoming ride request	Do not act on popup	Popup disappears after timeout	Pass/Fail	"passed
+
+"						
+TC-261	Home Screen	Clicking rider profile opens menu	Driver logged in	Tap profile picture	Menu opens with options	Pass/Fail	"passed
+
+"						
+TC-262	Home Screen	Verify menu contains Total Rides	Tap profile picture	Check menu	Total rides count visible	Pass/Fail	"passed
+
+"						
+TC-263	Home Screen	Verify Wallet section in menu	Menu open	Tap Wallet	Wallet page opens correctly	Pass/Fail	"passed
+
+"						
+TC-264	Home Screen	Verify Ride History section	Menu open	Tap History	Ride history list opens	Pass/Fail	"passed
+
+"						
+TC-265	Home Screen	Verify Support Chat section	Menu open	Tap Support Chat	Chat/support screen opens	Pass/Fail	"passed
+
+"						
+TC-266	Home Screen	Verify Ratings section	Menu open	Tap Ratings	Driver ratings screen opens	Pass/Fail	"passed
+
+"						
+TC-267	Home Screen	Verify Work Documents section	Menu open	Tap Work Documents	Document upload/view screen opens	Pass/Fail	"passed
+
+"						
+TC-268	Home Screen	Verify Settings section	Menu open	Tap Settings	Settings screen opens	Pass/Fail	"passed
+
+"						
+TC-269	Home Screen	Verify Invite Friends option	Menu open	Tap Invite Friends	Referral/share options appear	Pass/Fail	"passed
+
+"						
+TC-270	Home Screen	Verify Download Passenger App option	Menu open	Tap Download Passenger App	Redirects to passenger app page/store	Pass/Fail	"passed
+
+"						
+TC-271	Home Screen	Verify Logout option	Menu open	Tap Logout	User logged out to login screen	Pass/Fail	"passed
+
+"						
+TC-272	Home Screen	Menu closes when tapping outside	Menu open	Tap outside menu	Menu closes correctly	Pass/Fail	"passed
+
+"						
+TC-273	Home Screen	Menu scroll functionality	Menu items exceed screen	Scroll up/down	All menu items accessible	Pass/Fail	"passed
+
+"						
+TC-274	Home Screen	Total rides number correctness	Menu open	Verify Total Rides count	Matches backend data	Pass/Fail	"passed
+
+"						
+TC-275	Home Screen	Support chat sends messages	Support chat opened	Send a message	Message delivered successfully	Pass/Fail	"passed
+
+"						
+TC-276	Home Screen	Ride history loads correctly	History opened	View list	Rides load with date and status	Pass/Fail	"passed
+
+"						
+TC-277	Home Screen	Work documents upload	Work Docs screen open	Upload document	Document uploaded successfully	Pass/Fail	"passed
+
+"						
+TC-278	Home Screen	Work documents download	Work Docs screen open	Download document	Document opens/downloads	Pass/Fail	"passed
+
+"						
+TC-279	Home Screen	Driver rating display correctness	Ratings screen open	View ratings	Correct stars and reviews displayed	Pass/Fail	"passed
+
+"						
+TC-280	Home Screen	Settings update functionality	Settings screen open	Update any setting	Setting saved successfully	Pass/Fail	"passed
+
+"						
+TC-281	Wallet	Open Wallet page	Home screen open	1. Tap profile picture  2. Tap Wallet	Wallet page opens	Pass/Fail	"passed
+
+"						
+TC-282	Wallet	Refresh wallet	Wallet page open	1. Pull down to refresh	Wallet page refreshes	Pass/Fail	"passed
+
+"						
+TC-283	Wallet	Open Wallet info popup	Wallet page open	1. Tap question-mark icon	Info popup opens	Pass/Fail	"passed
+
+"						
+TC-284	Wallet	Close Wallet info popup	Popup open	1. Tap Close	Popup closes	Pass/Fail	"passed
+
+"						
+TC-285	Wallet	Open Balance Details	Wallet page open	1. Tap “Click here to get details”	Balance Details page opens	Pass/Fail	"passed
+
+"						
+TC-286	Wallet	View transactions	Balance Details open	1. Scroll list	Transactions visible	Pass/Fail	"passed
+
+"						
+TC-287	Wallet	Back to Wallet page	Balance Details open	1. Tap back arrow	Returns to Wallet page	Pass/Fail	"passed
+
+"						
+TC-288	Wallet	Open recharge popup	Wallet page open	1. Tap + icon	Recharge popup opens	Pass/Fail	"passed
+
+"						
+TC-289	Wallet	View recharge popup elements	Recharge popup open	1. Observe popup	Input and buttons visible	Pass/Fail	"passed
+
+"						
+TC-290	Wallet	Close recharge popup	Recharge popup open	1. Tap Cancel	Popup closes	Pass/Fail	"passed
+
+"						
+TC-291	Wallet	Recharge with empty amount	Recharge popup open	1. Leave input empty  2. Tap Add	System does not proceed	Pass/Fail	"passed
+
+"						
+TC-292	Wallet	Recharge with valid amount	Recharge popup open	1. Enter amount  2. Tap Add	Recharge proceeds	Pass/Fail	"passed
+
+"						
+TC-293	Wallet	Invalid characters in input	Recharge popup open	1. Enter letters/symbols	Field accepts numbers only	Pass/Fail	"passed
+
+"						
+TC-294	Wallet	Balance after recharge	Recharge completed	1. Go to Wallet page  2. Observe balance	Balance updated	Pass/Fail	"passed
+
+"						
+TC-295	Profile	Open Profile menu	Home screen open	Tap profile picture	Profile menu opens successfully	Pass/Fail	"passed
+
+"						
+TC-296	Profile	Verify Ride History option appears	Profile menu open	Observe menu options	Ride History option is visible	Pass/Fail	"passed
+
+"						
+TC-297	Ride History	Open Ride History page	Profile menu open	Tap “Ride History”	Ride History page opens successfully	Pass/Fail	"passed
+
+"						
+TC-298	Ride History	View In Progress rides	Ride History page open	Tap “In Progress”	In-progress ride list displayed	Pass/Fail	"passed
+
+"						
+TC-299	Ride History	View Completed rides	Ride History page open	Tap “Completed”	Completed ride list displayed	Pass/Fail	"passed
+
+"						
+TC-300	Ride History	View Canceled rides	Ride History page open	Tap “Canceled”	Canceled ride list displayed	Pass/Fail	"passed
+
+"						
+TC-301	Ride History	Verify canceled ride details	Canceled rides exist	Open canceled ride card	Pickup, dropoff & cancel reason visible	Pass/Fail	"passed
+
+"						
+TC-302	Ride History	Back from Ride History	Ride History page open	Tap back arrow	Returns to profile menu	Pass/Fail	"passed
+
+"						
+TC-303	Support Chat	Open Support Chat	Profile menu open	Tap “Support Chat”	Support Chat page opens successfully	Pass/Fail	"passed
+
+"						
+TC-304	Support Chat	Verify FAQ list displays	Support Chat page open	Scroll and observe FAQ items	FAQ list visible and readable	Pass/Fail	"passed
+
+"						
+TC-305	Support Chat	Expand/Collapse FAQ items	Support Chat page open	Tap FAQ dropdown	FAQ expands/collapses correctly	Pass/Fail	"passed
+
+"						
+TC-306	Support Chat	Verify WhatsApp button visible	Support Chat page open	Scroll to bottom	WhatsApp contact button is visible	Pass/Fail	"passed
+
+"						
+TC-307	Support Chat	WhatsApp redirect	Support Chat page open	Tap WhatsApp button	WhatsApp app opens successfully	Pass/Fail	"passed
+
+"						
+TC-308	Support Chat	Back from Support Chat	Support Chat page open	Tap back arrow	Returns to profile menu	Pass/Fail	"passed
+
+"						
+TC-309	Ratings	Open Ratings page	Profile menu open	Tap “Ratings”	Ratings page opens successfully	Pass/Fail	"passed
+
+"						
+TC-310	Ratings	Verify rating content	Ratings exist	Observe rating cards	Correct rating data displayed	Pass/Fail	"passed
+
+"						
+TC-311	Ratings	Verify empty rating state	No ratings exist	Observe screen	“No Rating Available” message displayed	Pass/Fail	"passed
+
+"						
+TC-312	Ratings	Back from Ratings page	Ratings page open	Tap back arrow	Returns to profile menu	Pass/Fail	"passed
+
+"						
+TC-313	Work Documents	Open Work Documents page	Profile menu open	Tap “Work Documents”	Upload Documents page opens successfully	Pass/Fail	"passed
+
+"						
+TC-314	Work Documents	Verify document upload sections	Upload Documents page open	Observe document labels	All document fields (Profile, ID front/back, Insurance) visible	Pass/Fail	"passed
+
+"						
+TC-315	Work Documents	Open upload options for Profile Image	Upload Documents page open	Tap Add on Profile Image	Upload options appear	Pass/Fail	"passed
+
+"						
+TC-316	Work Documents	Open upload options for Govt ID Front	Upload Documents page open	Tap Add on ID Front	Upload options appear	Pass/Fail	"passed
+
+"						
+TC-317	Work Documents	Open upload options for Govt ID Back	Upload Documents page open	Tap Add on ID Back	Upload options appear	Pass/Fail	"passed
+
+"						
+TC-318	Work Documents	Open upload options for Insurance Policy	Upload Documents page open	Tap Add on Insurance	Upload options appear	Pass/Fail	"passed
+
+"						
+TC-319	Work Documents	Choose from gallery option	Upload options modal open	Tap “Choose from Gallery”	Gallery opens successfully	Pass/Fail	"passed
+
+"						
+TC-320	Work Documents	Take a picture option	Upload options modal open	Tap “Take a Picture”	Camera opens successfully	Pass/Fail	"passed
+
+"						
+TC-321	Work Documents	Cancel upload modal	Upload options modal open	Tap “Cancel”	Modal closes successfully	Pass/Fail	"passed
+
+"						
+TC-322	Work Documents	Submit documents	Upload Documents page open	Tap “Submit”	Documents submitted successfully	Pass/Fail	"passed
+
+"						
+TC-323	Work Documents	Navigate back from Documents	Upload Documents page open	Tap back arrow	Returns to Profile menu	Pass/Fail	"passed
+
+"						
+							"passed
+
+"						
+TC-324	Settings	Open Settings page	Profile menu open	Tap “Settings”	Settings menu opens successfully	Pass/Fail	"passed
+
+"						
+TC-325	Settings	Open Account Info	Account menu open	Tap “Account Info”	Edit Profile page opens	Pass/Fail	"passed
+
+"						
+TC-326	Settings	Verify Edit Profile fields	Edit Profile page open	Observe fields	All profile fields visible	Pass/Fail	"passed
+
+"						
+TC-327	Settings	Update profile info	Edit Profile page open	Edit fields → Tap Update	Profile updates successfully	Pass/Fail	"passed
+
+"						
+TC-328	Settings	Open Change Phone Number	Edit Profile page open	Tap “Change Phone Number”	Phone number update page opens	Pass/Fail	"passed
+
+"						
+TC-329	Settings	Back from Edit Profile	Edit Profile page open	Tap back arrow	Returns to Settings menu	Pass/Fail	"passed
+
+"						
+							"passed
+
+"						
+TC-330	Settings	Open Languages page	Settings page open	Tap “Languages”	Choose Language page opens	Pass/Fail	"passed
+
+"						
+TC-331	Settings	Select language option	Languages page open	Select English/Arabic/French	Language is selected	Pass/Fail	"passed
+
+"						
+TC-332	Settings	Confirm language selection	Language selected	Tap “Confirm Languages”	Language updated successfully	Pass/Fail	"passed
+
+"						
+TC-333	Settings	Back from Languages	Languages page open	Tap back arrow	Returns to Settings menu	Pass/Fail	"passed
+
+"						
+							"passed
+
+"						
+TC-334	Settings	Open Delete Account page	Settings page open	Tap “Delete Account”	Delete Account page opens	Pass/Fail	"passed
+
+"						
+TC-335	Settings	Enter delete verification sum	Delete Account page open	Enter correct sum	User allowed to continue	Pass/Fail	"passed
+
+"						
+TC-336	Settings	Delete account action	Delete Account page open	Tap “Continue”	Account deleted successfully	Pass/Fail	"passed
+
+"						
+TC-337	Settings	Back from Delete Account	Delete Account page open	Tap back arrow	Returns to Settings menu	Pass/Fail	"passed
+
+"						
+							"passed
+
+"						
+TC-338	Settings	Send Device Logs	Settings page open	Tap “Send Device Logs”	Loading animation appears	Pass/Fail	"passed
+
+"						
+TC-339	Settings	Verify device logs sent	Device logs sending	Tap “Send Device Logs”	Logs displayed successfully	Pass/Fail	"passed
+
+"						
+TC-340	Settings	Back from Device Logs	Logs page open	Tap back arrow	Returns to Settings menu	Pass/Fail	"passed
+
+"						
+							"passed
+
+"						
+TC-341	Invite Friends	Open Invite Friends page	Profile menu open	Tap “Invite Friends”	Invite Friends page opens	Pass/Fail	"passed
+
+"						
+TC-342	Invite Friends	Verify share options visible	Invite Friends page open	Observe Messenger/WhatsApp buttons	Both share options visible	Pass/Fail	"passed
+
+"						
+TC-343	Invite Friends	Share via Messenger	Invite Friends page open	Tap Messenger button	Messenger share opens	Pass/Fail	"passed
+
+"						
+TC-344	Invite Friends	Share via WhatsApp	Invite Friends page open	Tap WhatsApp button	WhatsApp share opens	Pass/Fail	"passed
+
+"						
+TC-345	Invite Friends	Invite Friends direct button	Invite Friends page open	Tap “Invite Friends”	Share panel opens	Pass/Fail	"passed
+
+"						
+TC-346	Invite Friends	Back from Invite Friends	Invite Friends page open	Tap back arrow	Returns to Profile menu	Pass/Fail	"passed
+
+"						
+							"passed
+
+"						
+TC-347	Logout	Open Logout confirmation	Profile menu open	Tap “Logout”	Logout confirmation popup appears	Pass/Fail	"passed
+
+"						
+TC-348	Logout	Confirm logout	Logout popup open	Tap “Yes”	User is logged out	Pass/Fail	"passed
+
+"						
+TC-349	Logout	Cancel logout	Logout popup open	Tap “Cancel”	Popup closes — user stays logged in	Pass/Fail	"passed
+
+"						
+TC-350	Logout	Back from Logout attempt	Logged-in state	Tap back arrow	Returns to Profile menu	Pass/Fail	passed						
+TC-351	City to City	"Confirm if first time ride accepted by driver and rejected by rider then within 5 minutes another rider request generates
+for driver  "					Fail						
+
