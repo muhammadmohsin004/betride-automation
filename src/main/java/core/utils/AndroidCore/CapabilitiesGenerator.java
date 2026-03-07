@@ -54,8 +54,11 @@ public class CapabilitiesGenerator {
             // 🔥 FIXED: Appium Android driver requires UiAutomator2
             cap.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
 
-            // Load APK
-            cap.setCapability(MobileCapabilityType.APP, appDir + androidconfig.getProperty("androidapk"));
+            // Load APK only if androidapk is specified (skip if staging APK already installed)
+            String androidApk = androidconfig.getProperty("androidapk");
+            if (androidApk != null && !androidApk.trim().isEmpty()) {
+                cap.setCapability(MobileCapabilityType.APP, appDir + androidApk.trim());
+            }
 
             // Auto permissions
             cap.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, true);
