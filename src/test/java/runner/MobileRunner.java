@@ -31,7 +31,7 @@ import org.junit.runner.RunWith;
         "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"
     },
     monochrome = true,
-    tags = "@TC-008"
+    tags = "@TC-001"
 )
 public class MobileRunner {
 }
